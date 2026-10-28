@@ -1,6 +1,24 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { IconActivity, IconArrowLeft } from "icons";
 import { Button, ButtonDanger, ButtonGroup } from "primitives";
+import type { ComponentProps } from "react";
+
+// Mirrors the "Has Icon Start" / "Has Icon End" properties in Figma
+type IconToggleArgs = {
+  hasIconStart: boolean;
+  hasIconEnd: boolean;
+};
+
+const iconToggleArgTypes = {
+  hasIconStart: {
+    name: "Has Icon Start",
+    control: { type: "boolean" },
+  },
+  hasIconEnd: {
+    name: "Has Icon End",
+    control: { type: "boolean" },
+  },
+} as const;
 
 const meta: Meta<typeof Button> = {
   component: Button,
@@ -9,13 +27,18 @@ const meta: Meta<typeof Button> = {
 };
 export default meta;
 
-export const StoryButton: StoryObj<typeof Button> = {
+export const StoryButton: StoryObj<
+  ComponentProps<typeof Button> & IconToggleArgs
+> = {
   name: "Button",
   args: {
     children: "Hello world",
     variant: "primary",
+    hasIconStart: true,
+    hasIconEnd: true,
   },
   argTypes: {
+    ...iconToggleArgTypes,
     children: {
       control: { type: "text" },
     },
@@ -27,22 +50,27 @@ export const StoryButton: StoryObj<typeof Button> = {
       options: ["primary", "neutral", "subtle"],
     },
   },
-  render: ({ children, ...props }) => (
+  render: ({ children, hasIconStart, hasIconEnd, ...props }) => (
     <Button {...props}>
-      <IconArrowLeft />
+      {hasIconStart && <IconArrowLeft />}
       {children}
-      <IconActivity />
+      {hasIconEnd && <IconActivity />}
     </Button>
   ),
 };
 
-export const StoryButtonDanger: StoryObj<typeof ButtonDanger> = {
+export const StoryButtonDanger: StoryObj<
+  ComponentProps<typeof ButtonDanger> & IconToggleArgs
+> = {
   name: "Button Danger",
   args: {
     children: "Hello world",
     variant: "danger-primary",
+    hasIconStart: true,
+    hasIconEnd: true,
   },
   argTypes: {
+    ...iconToggleArgTypes,
     children: {
       control: { type: "text" },
     },
@@ -54,11 +82,11 @@ export const StoryButtonDanger: StoryObj<typeof ButtonDanger> = {
       options: ["danger-primary", "danger-subtle"],
     },
   },
-  render: ({ children, ...props }) => (
+  render: ({ children, hasIconStart, hasIconEnd, ...props }) => (
     <ButtonDanger {...props}>
-      <IconArrowLeft />
+      {hasIconStart && <IconArrowLeft />}
       {children}
-      <IconActivity />
+      {hasIconEnd && <IconActivity />}
     </ButtonDanger>
   ),
 };
