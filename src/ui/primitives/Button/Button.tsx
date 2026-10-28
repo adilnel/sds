@@ -1,6 +1,11 @@
 import { clsx } from "clsx";
 import React, { ComponentPropsWithoutRef } from "react";
-import { Button as RACButton, Link as RACLink } from "react-aria-components";
+import {
+  Button as RACButton,
+  Link as RACLink,
+  type ButtonProps as RACButtonProps,
+  type LinkProps as RACLinkProps,
+} from "react-aria-components";
 import { type AnchorOrButtonProps } from "utils";
 import "./button.css";
 
@@ -25,7 +30,7 @@ export const Button = React.forwardRef(function Button(
 
   return isAnchorProps(props) ? (
     <RACLink
-      {...sharedProps}
+      {...(sharedProps as RACLinkProps)}
       className={classNames}
       ref={ref as React.ForwardedRef<HTMLAnchorElement>}
     >
@@ -33,7 +38,7 @@ export const Button = React.forwardRef(function Button(
     </RACLink>
   ) : (
     <RACButton
-      {...sharedProps}
+      {...(sharedProps as RACButtonProps)}
       className={classNames}
       ref={ref as React.ForwardedRef<HTMLButtonElement>}
     >
@@ -71,7 +76,7 @@ export const ButtonDanger = React.forwardRef(function Button(
 
   return isAnchorProps(props) ? (
     <RACLink
-      {...sharedProps}
+      {...(sharedProps as RACLinkProps)}
       className={classNames}
       ref={ref as React.ForwardedRef<HTMLAnchorElement>}
     >
@@ -79,7 +84,7 @@ export const ButtonDanger = React.forwardRef(function Button(
     </RACLink>
   ) : (
     <RACButton
-      {...sharedProps}
+      {...(sharedProps as RACButtonProps)}
       className={classNames}
       ref={ref as React.ForwardedRef<HTMLButtonElement>}
     >
