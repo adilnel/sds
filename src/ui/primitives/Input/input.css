@@ -30,7 +30,7 @@
     --input-border-color: var(--sds-color-border-danger-default);
   }
 
-  &[data-focus-visible] {
+  &[data-focused]:not([data-invalid]) {
     --input-border-color: var(--sds-color-border-brand-secondary);
   }
 }
