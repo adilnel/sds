@@ -25,4 +25,5 @@ export * from "./Table/Table";
 export * from "./Tag/Tag";
 export * from "./Text/Text";
 export * from "./Textarea/Textarea";
+export * from "./ThemeSwitch/ThemeSwitch";
 export * from "./Tooltip/Tooltip";

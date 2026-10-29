@@ -1,21 +1,6 @@
-import { type Theme, useTheme } from "hooks";
-import { IconMonitor, IconMoon, IconSun } from "icons";
-import { IconButton } from "primitives";
-
-const nextTheme: Record<Theme, Theme> = {
-  system: "light",
-  light: "dark",
-  dark: "system",
-};
-
-const themeIcon = {
-  system: <IconMonitor />,
-  light: <IconSun />,
-  dark: <IconMoon />,
-};
+import { ThemeSwitch as ThemeSwitchButton } from "primitives";
 
 export function ThemeSwitch() {
-  const { theme, setTheme } = useTheme();
   // Button drops the style prop, so position the wrapper instead
   return (
     <div
@@ -26,13 +11,7 @@ export function ThemeSwitch() {
         zIndex: 1,
       }}
     >
-      <IconButton
-        variant="neutral"
-        aria-label={`Theme: ${theme}. Switch to ${nextTheme[theme]}`}
-        onPress={() => setTheme(nextTheme[theme])}
-      >
-        {themeIcon[theme]}
-      </IconButton>
+      <ThemeSwitchButton />
     </div>
   );
 }
