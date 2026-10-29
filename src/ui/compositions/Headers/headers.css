@@ -62,8 +62,13 @@
   }
 }
 
-.navigation-dialog-close {
+.navigation-dialog-header {
+  /* Mirrors the Header section padding so the logo and close button sit where they were in the header */
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  left: var(--sds-size-space-600);
   position: absolute;
-  right: var(--sds-size-space-300);
-  top: var(--sds-size-space-300);
+  right: var(--sds-size-space-600);
+  top: var(--sds-size-space-800);
 }
