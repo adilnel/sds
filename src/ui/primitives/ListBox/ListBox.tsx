@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { IconCheck } from "icons";
 import {
   ListBox as RACListBox,
   ListBoxItem as RACListBoxItem,
@@ -22,7 +23,35 @@ export function ListBox<T extends object>({
 }
 
 export type ListBoxItemProps = RACListBoxItemProps;
-export function ListBoxItem({ className, ...props }: ListBoxItemProps) {
+export function ListBoxItem({
+  className,
+  children,
+  textValue,
+  ...props
+}: ListBoxItemProps) {
   const classNames = clsx(className, "list-box-item");
-  return <RACListBoxItem className={classNames} {...props} />;
+  return (
+    <RACListBoxItem
+      className={classNames}
+      textValue={
+        textValue ?? (typeof children === "string" ? children : undefined)
+      }
+      {...props}
+    >
+      {(renderProps) => (
+        <>
+          {typeof children === "function" ? (
+            children(renderProps)
+          ) : typeof children === "string" ? (
+            <span className="list-box-item-label">{children}</span>
+          ) : (
+            children
+          )}
+          {renderProps.isSelected && (
+            <IconCheck className="list-box-item-check" />
+          )}
+        </>
+      )}
+    </RACListBoxItem>
+  );
 }
