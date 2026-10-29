@@ -100,14 +100,16 @@ export function HeaderAuth() {
             </IconButton>
             <DialogModal isOpen={open}>
               <Dialog className={clsx("navigation-dialog")}>
-                <IconButton
-                  className={clsx("navigation-dialog-close")}
-                  variant="subtle"
-                  aria-label="Close navigation menu"
-                  onPress={() => setOpen(false)}
-                >
-                  <IconX />
-                </IconButton>
+                <div className={clsx("navigation-dialog-header")}>
+                  <Logo />
+                  <IconButton
+                    variant="subtle"
+                    aria-label="Close navigation menu"
+                    onPress={() => setOpen(false)}
+                  >
+                    <IconX />
+                  </IconButton>
+                </div>
                 <Flex
                   direction="column"
                   alignPrimary="space-between"
