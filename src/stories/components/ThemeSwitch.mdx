@@ -1,0 +1,41 @@
+import { Canvas, Controls, Meta, Source } from "@storybook/blocks";
+import * as ThemeSwitchStories from "./ThemeSwitch.stories";
+
+<Meta of={ThemeSwitchStories} />
+
+# Theme Switch
+
+A single icon button that switches the SDS color theme. Mirrors the
+"How it works" notes next to the
+[Theme Switch component in Figma](https://www.figma.com/design/SaWWpoLuZoeGnscY9jdNvI/Simple-Design-System-Local?node-id=3034-188).
+
+<Canvas of={ThemeSwitchStories.StoryThemeSwitch} />
+
+<Controls of={ThemeSwitchStories.StoryThemeSwitch} />
+
+## How it works
+
+One button, not three. Each click moves to the next theme and the icon shows
+the current one. The three Figma variants are these icon states.
+
+- **System** (Monitor icon) follows the OS setting (`prefers-color-scheme`).
+- **Light** (Sun icon) forces the light theme (`data-theme="light"`).
+- **Dark** (Moon icon) forces the dark theme (`data-theme="dark"`).
+
+After Dark it goes back to System. The choice is saved in `localStorage`
+(`sds-theme`), so it sticks on the next visit. Going back to System clears it.
+
+<Canvas of={ThemeSwitchStories.StoryThemeSwitchCycle} />
+
+## Usage
+
+<Source
+  language="tsx"
+  code={`import { ThemeSwitch } from "primitives";
+
+<ThemeSwitch />
+`} />
+
+The button's accessible name tells screen readers the current theme and the
+next one, for example "Theme: system. Switch to light". To read or set the
+theme elsewhere, use the `useTheme` hook from `hooks`.
