@@ -63,7 +63,8 @@
 }
 
 .navigation-dialog-close {
+  /* Matches the Header section padding so the close button sits where the menu button was */
   position: absolute;
-  right: var(--sds-size-space-300);
-  top: var(--sds-size-space-300);
+  right: var(--sds-size-space-600);
+  top: var(--sds-size-space-800);
 }
