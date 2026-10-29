@@ -166,7 +166,13 @@ function processTokenJSON(data) {
         lines.push("@media (prefers-color-scheme: dark) {");
         settings.colorSchemesDark.forEach((scheme, i) => {
           if (i === 0) {
-            lines.push(...[`  /* ${key}: ${scheme} (default) */`, "  :root {"]);
+            // [data-theme="light"] on <html> opts out of the system dark scheme
+            lines.push(
+              ...[
+                `  /* ${key}: ${scheme} (default) */`,
+                '  :root:not([data-theme="light"]) {',
+              ],
+            );
           } else {
             lines.push(
               ...[
@@ -178,6 +184,14 @@ function processTokenJSON(data) {
           lines.push(drawCSSPropLines(definitions[scheme], "    "), "  }");
         });
         lines.push("}");
+        // [data-theme="dark"] on <html> forces the dark scheme regardless of system setting
+        const darkDefault = settings.colorSchemesDark[0];
+        lines.push(
+          `/* ${key}: ${darkDefault} (forced) */`,
+          ':root[data-theme="dark"] {',
+          drawCSSPropLines(definitions[darkDefault], "  "),
+          "}",
+        );
       }
     } else {
       let first;

@@ -25,9 +25,12 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --global-focus-ring-color: rgb(0, 106, 255);
   }
+}
+:root[data-theme="dark"] {
+  --global-focus-ring-color: rgb(0, 106, 255);
 }
 
 html {
