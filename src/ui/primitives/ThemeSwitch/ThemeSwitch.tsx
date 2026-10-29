@@ -8,11 +8,13 @@ const nextTheme: Record<Theme, Theme> = {
   dark: "system",
 };
 
-const themeIcon = {
-  system: <IconMonitor />,
-  light: <IconSun />,
-  dark: <IconMoon />,
-};
+// Resolved at render time: "icons" imports from "primitives", so a
+// module-level reference would hit the circular import before it initializes
+function ThemeIcon({ theme }: { theme: Theme }) {
+  if (theme === "light") return <IconSun />;
+  if (theme === "dark") return <IconMoon />;
+  return <IconMonitor />;
+}
 
 export type ThemeSwitchProps = Omit<
   IconButtonProps,
@@ -34,7 +36,7 @@ export function ThemeSwitch({
       aria-label={`Theme: ${theme}. Switch to ${nextTheme[theme]}`}
       onPress={() => setTheme(nextTheme[theme])}
     >
-      {themeIcon[theme]}
+      <ThemeIcon theme={theme} />
     </IconButton>
   );
 }
