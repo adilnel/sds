@@ -9,6 +9,9 @@ const preview: Preview = {
     docs: {
       theme: theme,
     },
+    options: {
+    storySort: { order: ["SDS Primitives","SDS Components", ["Icons","Theme Switch"], "*"] },
+  },
   },
 
   globalTypes: {
